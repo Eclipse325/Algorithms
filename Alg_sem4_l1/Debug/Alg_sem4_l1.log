@@ -1,0 +1,10 @@
+﻿  Alg_sem4_l1.cpp
+c:\users\dimokku\source\repos\alg_sem4_l1\linkedlist.cpp(271): warning C4244: =: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=double
+          ]
+  c:\users\dimokku\source\repos\alg_sem4_l1\linkedlist.cpp(245): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\dimokku\source\repos\alg_sem4_l1\alg_sem4_l1.cpp(57): note: выполняется компиляция ссылки на экземпляр шаблон функции "void LinkedList<double>::swap(size_t,size_t)"
+  c:\users\dimokku\source\repos\alg_sem4_l1\alg_sem4_l1.cpp(32): note: выполняется компиляция ссылки на экземпляр шаблон класс "LinkedList<double>"
+  Alg_sem4_l1.vcxproj -> C:\Users\Dimokku\source\repos\Alg_sem4_l1\Debug\Alg_sem4_l1.exe
