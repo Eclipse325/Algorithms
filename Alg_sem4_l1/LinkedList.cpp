@@ -12,13 +12,6 @@ void LinkedList<T>::reset_list()
 }
 
 template <class T>
-void LinkedList<T>::add_first(T newElem)
-{
-	head = new Node(newElem);
-	tail = head;
-}
-
-template <class T>
 LinkedList<T>::LinkedList()
 {
 	reset_list();
@@ -71,7 +64,7 @@ void LinkedList<T>::push_front(T newElem)
 template <class T>
 void LinkedList<T>::pop_back()
 {
-	if (size == 0) cout << "\nНечего удалять, список пуст\n";
+	if (size == 0) cout << "\nГЌГҐГ·ГҐГЈГ® ГіГ¤Г Г«ГїГІГј, Г±ГЇГЁГ±Г®ГЄ ГЇГіГ±ГІ\n";
 	if (size == 1) {
 		delete tail; tail = head = nullptr;
 		size--;
@@ -108,7 +101,7 @@ void LinkedList<T>::insert(size_t index, T newElem)
 {
 	if (index >= size) {
 		index = size - 1;
-		cout << "Индекс больше, чем наибольший индекс списка. Введенный индекс приведен к максимальному индексу списка";
+		cout << "Г€Г­Г¤ГҐГЄГ± ГЎГ®Г«ГјГёГҐ, Г·ГҐГ¬ Г­Г ГЁГЎГ®Г«ГјГёГЁГ© ГЁГ­Г¤ГҐГЄГ± Г±ГЇГЁГ±ГЄГ . Г‚ГўГҐГ¤ГҐГ­Г­Г»Г© ГЁГ­Г¤ГҐГЄГ± ГЇГ°ГЁГўГҐГ¤ГҐГ­ ГЄ Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г®Г¬Гі ГЁГ­Г¤ГҐГЄГ±Гі Г±ГЇГЁГ±ГЄГ ";
 	}
 
 	if (size == 0)
@@ -152,7 +145,7 @@ template <class T>
 T LinkedList<T>::at(size_t index)
 {
 	if (index >= size)
-		throw out_of_range("Индекс больше, чем наибольший индекс списка");
+		throw out_of_range("Г€Г­Г¤ГҐГЄГ± ГЎГ®Г«ГјГёГҐ, Г·ГҐГ¬ Г­Г ГЁГЎГ®Г«ГјГёГЁГ© ГЁГ­Г¤ГҐГЄГ± Г±ГЇГЁГ±ГЄГ ");
 	else {
 		Node *current = head;
 		size_t counter = 0;
@@ -272,7 +265,7 @@ void LinkedList<T>::swap(size_t index1, size_t index2)
 		current1->data = current2->data;
 		current2->data = temp;
 	}
-	else cout << "\nСписок пуст, нечего обменивать\n";
+	else cout << "\nГ‘ГЇГЁГ±Г®ГЄ ГЇГіГ±ГІ, Г­ГҐГ·ГҐГЈГ® Г®ГЎГ¬ГҐГ­ГЁГўГ ГІГј\n";
 }
 
 template <typename T>
