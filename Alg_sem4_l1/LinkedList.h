@@ -26,7 +26,6 @@ public:
 		Node *next;
 		Node *prev;
 	};
-	void add_first(T newElem);
 	void reset_list();
 
 	Node *head{};
