@@ -64,7 +64,7 @@ void LinkedList<T>::push_front(T newElem)
 template <class T>
 void LinkedList<T>::pop_back()
 {
-	if (size == 0) cout << "\nÍå÷åãî óäàëÿòü, ñïèñîê ïóñò\n";
+	if (size == 0) cout << "\nList is empty\n";
 	if (size == 1) {
 		delete tail; tail = head = nullptr;
 		size--;
@@ -101,7 +101,7 @@ void LinkedList<T>::insert(size_t index, T newElem)
 {
 	if (index >= size) {
 		index = size - 1;
-		cout << "Èíäåêñ áîëüøå, ÷åì íàèáîëüøèé èíäåêñ ñïèñêà. Ââåäåííûé èíäåêñ ïðèâåäåí ê ìàêñèìàëüíîìó èíäåêñó ñïèñêà";
+		cout << "Index is out of range. Index maxed out.";
 	}
 
 	if (size == 0)
@@ -145,7 +145,7 @@ template <class T>
 T LinkedList<T>::at(size_t index)
 {
 	if (index >= size)
-		throw out_of_range("Èíäåêñ áîëüøå, ÷åì íàèáîëüøèé èíäåêñ ñïèñêà");
+		throw out_of_range("Index is out of range");
 	else {
 		Node *current = head;
 		size_t counter = 0;
@@ -162,7 +162,7 @@ template <class T>
 void LinkedList<T>::remove(size_t index)
 {
 	if (index >= size)
-		throw out_of_range("Index is greater than list size");
+		throw out_of_range("Index is out of range");
 	Node *current = head;
 	size_t counter = 0;
 	while (counter != index)
@@ -211,7 +211,7 @@ template <class T>
 void LinkedList<T>::set(size_t index, T newElem)
 {
 	if (index >= size) {
-		throw std::out_of_range("Index is greater than list size");
+		throw std::out_of_range("Index is out of range");
 	}
 	else {
 		size_t counter = 0;
@@ -231,41 +231,6 @@ bool LinkedList<T>::isEmpty()
 	if (size == 0)
 		check = true;
 	return check;
-}
-
-template <class T>
-void LinkedList<T>::swap(size_t index1, size_t index2)
-{
-	if (size != 0) {
-		Node *current1 = head;
-		Node *current2 = head;
-		int counter = 0;
-		int min, max;
-		if (index1 >= index2) {
-			max = index1; min = index2;
-		}
-		else {
-			max = index2; min = index1;
-		}
-		while (counter < min)
-		{
-			if (current1->next != nullptr)
-				current1 = current1->next;
-			counter++;
-		}
-		current2 = current1;
-		while (counter < max && current2 != nullptr)
-		{
-			if (current2->next != nullptr)
-				current2 = current2->next;
-			counter++;
-		}
-		int temp;
-		temp = current1->data;
-		current1->data = current2->data;
-		current2->data = temp;
-	}
-	else cout << "\nÑïèñîê ïóñò, íå÷åãî îáìåíèâàòü\n";
 }
 
 template <typename T>
