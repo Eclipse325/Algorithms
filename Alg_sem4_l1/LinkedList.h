@@ -47,9 +47,9 @@ public:
 		if (linked_list.size == 0)
 			return os << "[nullptr]";
 		auto* list = linked_list.create_list_iterator();
-		os << "[nullptr] <- ";
+		os << "[nullptr] <-> ";
 		while (list->has_next()) {
-			os << "[" << list->next() << "] <- ";
+			os << "[" << list->next() << "] <-> ";
 		}
 		os << "[nullptr]" << std::endl;
 		return os;
@@ -66,9 +66,7 @@ public:
 	T at(size_t index); //Get an item by index
 	void remove(size_t index); //Remove an item by index
 	size_t get_size(); //Get list size
-	void print_to_console(); //doesn't use by this programm
 	void clear(); //Remove all items from the list
 	void set(size_t index, T newElem); //Set new item value by index
-	bool isEmpty(); //Is list empty? 0 - No, 1 - Yes
-	void swap(size_t index1, size_t index2); //Swap of two items by index
+	bool isEmpty(); //Is list empty?
 };
