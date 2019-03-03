@@ -3,9 +3,15 @@
 #include "LinkedList.h"
 using namespace std;
 
-template <class T>
 void LinkedList<T>::reset_list()
 {
+	Node *current = head;
+	Node *temp = current;
+	while (current != nullptr) {
+		delete temp;
+		current = current->next;
+		temp = current;
+	}
 	head = nullptr;
 	tail = nullptr;
 	size = 0;
