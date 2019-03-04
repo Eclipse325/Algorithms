@@ -65,13 +65,26 @@ namespace LinkedListTests
 			Assert::IsTrue(lst.at(0) == 5);
 		}
 
-		TEST_METHOD(at_out_of_range_int) //at out of range
+		TEST_METHOD(at_over_int) //at out of range
 		{
 			LinkedList<int> lst;
 			lst.push_front(5);
 			lst.push_front(6);
 			try {
 				lst.at(5);
+			}
+			catch (const std::out_of_range& error) {
+				Assert::AreEqual("Index is out of range", error.what());
+			}
+		}
+
+		TEST_METHOD(at_less_int) //at out of range
+		{
+			LinkedList<int> lst;
+			lst.push_front(5);
+			lst.push_front(6);
+			try {
+				lst.at(-1);
 			}
 			catch (const std::out_of_range& error) {
 				Assert::AreEqual("Index is out of range", error.what());
@@ -113,8 +126,12 @@ namespace LinkedListTests
 		TEST_METHOD(insert_item_empty_list_double) //Check to insert an item in an empty list
 		{
 			LinkedList<double> lst;
-			lst.insert(5, 1.125);
-			Assert::IsTrue(lst.at(0) == 1.125);
+			try {
+				lst.insert(5, 1.125);
+			}
+			catch (const std::out_of_range& error) {
+				Assert::AreEqual("Index is out of range", error.what());
+			}
 		}
 
 		TEST_METHOD(insert_item_first_double) //Check to insert an item by index into the beginning
@@ -155,8 +172,27 @@ namespace LinkedListTests
 			lst.push_back(5.5);
 			lst.push_back(5.5);
 			lst.push_back(5.5);
-			lst.insert(5, 6.1);
-			Assert::IsTrue(lst.at(2) == 6.1);
+			try {
+				lst.set(0, 5);;
+			}
+			catch (const std::out_of_range& error) {
+				Assert::AreEqual("Index is out of range", error.what());
+			}
+		}
+
+		TEST_METHOD(is_insert_less_double) //Check for insertion of an item into the list with an index outside the list
+										//(index is reduced to the maximum index of the list)
+		{
+			LinkedList<double> lst;
+			lst.push_back(5.5);
+			lst.push_back(5.5);
+			lst.push_back(5.5);
+			try {
+				lst.set(0, -1);;
+			}
+			catch (const std::out_of_range& error) {
+				Assert::AreEqual("Index is out of range", error.what());
+			}
 		}
 
 		TEST_METHOD(pop_front_empty_list_char) //Check to remove the first item of the empty list
@@ -204,6 +240,17 @@ namespace LinkedListTests
 			}
 		}
 
+		TEST_METHOD(set_less_of_range_int) //Check for replacement of an empty/over list item
+		{
+			LinkedList<int> lst;
+			try {
+				lst.set(0, -1);;
+			}
+			catch (const std::out_of_range& error) {
+				Assert::AreEqual("Index is out of range", error.what());
+			}
+		}
+
 		TEST_METHOD(set_Node_char) //Check for correct replacement of the item value
 		{
 			LinkedList<char> lst;
@@ -228,6 +275,17 @@ namespace LinkedListTests
 				lst.remove(1);
 			}
 			catch(const std::out_of_range& error){
+				Assert::AreEqual("Index is out of range", error.what());
+			}
+		}
+
+		TEST_METHOD(remove_less_int) //Check for deletion of element out of range 
+		{
+			LinkedList<int> lst;
+			try {
+				lst.remove(1);
+			}
+			catch (const std::out_of_range& error) {
 				Assert::AreEqual("Index is out of range", error.what());
 			}
 		}
