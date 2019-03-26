@@ -1,0 +1,4 @@
+﻿  Alg_sem4_l2.cpp
+c:\users\dimokku\source\repos\alg_sem4_l2\rb_tree.h(136): warning C4715: RB_Tree<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,double>::sibling: значение возвращается не при всех путях выполнения
+c:\users\dimokku\source\repos\alg_sem4_l2\rb_tree.h(63): warning C4715: RB_Tree<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,double>::DFT_Iterator::next: значение возвращается не при всех путях выполнения
+  Alg_sem4_l2.vcxproj -> C:\Users\Dimokku\source\repos\Alg_sem4_l2\Debug\Alg_sem4_l2.exe
