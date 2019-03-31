@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <iostream>
-#include "..//Alg_sem4_l2/RB_Tree.h"
-#include "..//Alg_sem4_l2/RB_Tree.cpp"
+#include "..//Alg_sem4_l2/Map.h"
+#include "..//Alg_sem4_l2/Map.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -13,13 +13,13 @@ namespace RB_TreeTests
 	public:
 		TEST_METHOD(find_empty)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			Assert::IsTrue(tree.find("sas") == nullptr);
 		}
 
 		TEST_METHOD(find)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("December", 12);
 			tree.insert("January", 1);
 			tree.insert("April", 4);
@@ -29,13 +29,13 @@ namespace RB_TreeTests
 
 		TEST_METHOD(true_size_empty)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			Assert::IsTrue(tree.size == 0);
 		}
 
 		TEST_METHOD(true_size)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("December", 12);
 			tree.insert("January", 1);
 			tree.insert("April", 4);
@@ -46,14 +46,14 @@ namespace RB_TreeTests
 
 		TEST_METHOD(remove_empty)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.remove("sas");
 			Assert::IsTrue(tree.size == 0 && tree.find("sas") == nullptr);
 		}
 
 		TEST_METHOD(remove_one)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("kek", 1);
 			tree.remove("kek");
 			Assert::IsTrue(tree.size == 0 && tree.find("kek") == nullptr);
@@ -61,15 +61,15 @@ namespace RB_TreeTests
 
 		TEST_METHOD(remove_case1_keys) // Remove the red node (CHECK MAIN FILE)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("January", 15);
 			tree.insert("February", 6);
 			tree.insert("March", 9);
 			tree.insert("April", 5); // AFTER THIS INSERTION SOME GOING WRONG
-			/*tree.insert("May", 8);
+			tree.insert("May", 8);
 			tree.insert("June", 15);
 			tree.insert("Jule", 1);
-			tree.remove("Jule"); //it is red node*/
+			tree.remove("Jule"); //it is red node
 
 			string a1[] = { "January", "February", "April", "March", "June", "May" };
 			string *a2 = new string[6];
@@ -79,15 +79,15 @@ namespace RB_TreeTests
 				a2[i] = iter->next()->key;
 				i++;
 			}
-			Assert::IsTrue(/*a2[0] == "February" && a2[1] == "April" 
+			Assert::IsTrue(tree.are_equal_keys(a1, a2, 6, 6)/*a2[0] == "February" && a2[1] == "April" 
 							&& a2[2] == "June" && a2[3] == "January"
-							&& a2[4] == "March" && a2[5] == "May"*/tree.root->key == "February"); /*MUST BE JANUARY!!!*/
+							&& a2[4] == "March" && a2[5] == "May"*/ /*tree.root->key == "February"*/); /*MUST BE JANUARY!!!*/
 			delete[]a2;
 		}
 
 		TEST_METHOD(remove_case1_colors) // Remove the red node 
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("January", 15);
 			tree.insert("February", 6);
 			tree.insert("March", 9);
@@ -110,9 +110,9 @@ namespace RB_TreeTests
 			delete[]b2;
 		}
 
-		TEST_METHOD(remove_case2) // Remove the red node 
+		TEST_METHOD(remove_case2)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("January", 15);
 			tree.insert("February", 6);
 			tree.insert("March", 9);
@@ -141,14 +141,14 @@ namespace RB_TreeTests
 
 		TEST_METHOD(clear_empty)
 		{
-			RB_Tree<int, double> tree;
+			Map<int, double> tree;
 			tree.clear();
 			Assert::IsTrue(tree.size == 0 && tree.root == nullptr);
 		}
 
 		TEST_METHOD(clear_one)
 		{
-			RB_Tree<int, double> tree;
+			Map<int, double> tree;
 			tree.insert(15, 3.5);
 			tree.clear();
 			Assert::IsTrue(tree.size == 0 && tree.find(15) == nullptr && tree.root == nullptr);
@@ -156,7 +156,7 @@ namespace RB_TreeTests
 
 		TEST_METHOD(clear_two)
 		{
-			RB_Tree<int, double> tree;
+			Map<int, double> tree;
 			tree.insert(15, 3.5);
 			tree.insert(19, 8);
 			tree.clear();
@@ -165,7 +165,7 @@ namespace RB_TreeTests
 
 		TEST_METHOD(clear_three)
 		{
-			RB_Tree<int, double> tree;
+			Map<int, double> tree;
 			tree.insert(15, 3.5);
 			tree.insert(19, 8);
 			tree.insert(10, 1);
@@ -175,7 +175,7 @@ namespace RB_TreeTests
 
 		TEST_METHOD(clear)
 		{
-			RB_Tree<int, double> tree;
+			Map<int, double> tree;
 			tree.insert(1, 12);
 			tree.insert(2, 11);
 			tree.insert(3, 10);
@@ -194,13 +194,13 @@ namespace RB_TreeTests
 
 		TEST_METHOD(getValues_and_getKey_empty)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			Assert::IsTrue(tree.get_keys() && tree.get_values());
 		}
 
 		TEST_METHOD(getValues_and_getKey)
 		{
-			RB_Tree<string, double> tree;
+			Map<string, double> tree;
 			tree.insert("January", 15);
 			tree.insert("February", 6);
 			tree.insert("March", 9);
@@ -211,21 +211,5 @@ namespace RB_TreeTests
 			tree.insert("Cucumber", 133);
 			Assert::IsTrue(tree.get_keys() && tree.get_values());
 		}
-
-
-
-
-
-
-		/*TEST_METHOD(getValues_and_getKey)
-		{
-			RB_Tree<string, double> tree;
-			tree.insert("December", 12);
-			tree.insert("January", 1);
-			tree.insert("April", 4);
-			tree.insert("Jule", 7);
-			Assert::IsTrue(*tree.get_keys() == "[nullptr] <-> [Jule] <-> [January] <-> [April] <-> [December] <-> [nullptr]"
-				&& *tree.get_values() == nullptr);
-		}*/
 	};
 }
