@@ -14,7 +14,7 @@ using namespace std;
 
 
 template <class T, class G>
-class RB_Tree
+class Map
 {
 public:
 	class Node
@@ -73,8 +73,8 @@ public:
 	Node *root;
 	size_t size;
 
-	RB_Tree();
-	~RB_Tree();
+	Map();
+	~Map();
 	void insert(T key, G value); //To add the node to tree
 	void remove(T key); // remove the node from tree
 	Node* find(T key) {
@@ -85,19 +85,16 @@ public:
 				if (key > temp->key) {
 					if(temp->right != nullptr)
 						temp = temp->right;
-					else {
-						cout << "\nThe item with the key \"" << key << "\" was not found\n"; return nullptr;
-					}
+					else
+						 return nullptr;
 				}
 				else if (temp->key >= key) {
-					if (temp->key == key) {
-						cout << "\nThe item with the key \"" << temp->key << "\" was found\n"; return temp;
-					}
+					if (temp->key == key) 
+						return temp;
 					if(temp->left != nullptr)
 						temp = temp->left;
-					else {
-						cout << "\nThe item with the key \"" << key << "\" was not found\n"; return nullptr;
-					}
+					else 
+						return nullptr;
 				}
 			}
 		}
