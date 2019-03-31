@@ -1,25 +1,25 @@
 #include "pch.h"
-#include "RB_Tree.h"
+#include "Map.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
 template <class T, class G>
-RB_Tree<T, G>::RB_Tree()
+Map<T, G>::Map()
 {
 	size = 0;
 	root = nullptr;
 }
 
 template <class T, class G>
-RB_Tree<T, G>::~RB_Tree()
+Map<T, G>::~Map()
 {
 	clear();
 }
 
 template <class T, class G>
-RB_Tree<T, G>::Node::Node(T key, G value, bool color, Node *right, Node *left)
+Map<T, G>::Node::Node(T key, G value, bool color, Node *right, Node *left)
 {
 	this->value = value;
 	this->key = key;
@@ -27,7 +27,7 @@ RB_Tree<T, G>::Node::Node(T key, G value, bool color, Node *right, Node *left)
 }
 
 template <class T, class G>
-RB_Tree<T, G>::Node::~Node()
+Map<T, G>::Node::~Node()
 {
 	value = {};
 	p = left = right = nullptr;
@@ -35,7 +35,7 @@ RB_Tree<T, G>::Node::~Node()
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::insert(T key, G value)
+void Map<T, G>::insert(T key, G value)
 {
 	Node *t = new Node(key, value, 0, nullptr, nullptr);
 	if (size == 0) {
@@ -74,7 +74,7 @@ void RB_Tree<T, G>::insert(T key, G value)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::insert_case1(Node *n)
+void Map<T, G>::insert_case1(Node *n)
 {
 	if (n->p == nullptr)
 		n->color = 1;
@@ -82,7 +82,7 @@ void RB_Tree<T, G>::insert_case1(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::insert_case2(Node *n)
+void Map<T, G>::insert_case2(Node *n)
 {
 	if (n->p->color == 1)
 		return;
@@ -90,7 +90,7 @@ void RB_Tree<T, G>::insert_case2(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::insert_case3(Node *n)
+void Map<T, G>::insert_case3(Node *n)
 {
 	Node *u = uncle(n);
 	if ((u != nullptr) && (u->color == 0)) {
@@ -103,7 +103,7 @@ void RB_Tree<T, G>::insert_case3(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::insert_case4(Node *n)
+void Map<T, G>::insert_case4(Node *n)
 {
 	Node *g = grandparent(n);
 	if ((n == n->p->right) && (n->p == g->left)) {
@@ -118,7 +118,7 @@ void RB_Tree<T, G>::insert_case4(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::insert_case5(Node *n)
+void Map<T, G>::insert_case5(Node *n)
 {
 	Node *g = grandparent(n);
 	n->p->color = 1;
@@ -130,13 +130,13 @@ void RB_Tree<T, G>::insert_case5(Node *n)
 
 
 template <class T, class G>
-void RB_Tree<T, G>::clear() 
+void Map<T, G>::clear()
 {
 	clear(root);
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::remove(T key)
+void Map<T, G>::remove(T key)
 {	
 	Node *n = find(key);
 	if (n != nullptr) {
@@ -167,9 +167,8 @@ void RB_Tree<T, G>::remove(T key)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_one_child(Node *n)
+void Map<T, G>::delete_one_child(Node *n)
 {
-	if (n->p) {
 		if (!n->left && !n->right) {
 			if (n->color == 1 && !sibling(n) && n->p->color == 0)
 				n->p->color = 1;
@@ -187,18 +186,17 @@ void RB_Tree<T, G>::delete_one_child(Node *n)
 		n->p = nullptr;
 		delete n;
 		n = nullptr;
-	}
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_case1(Node *n)
+void Map<T, G>::delete_case1(Node *n)
 {
 	if (n->p != nullptr)
 		delete_case2(n);
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_case2(Node *n)
+void Map<T, G>::delete_case2(Node *n)
 {
 	Node *s = sibling(n);
 	if (s && s->color == 0) {
@@ -213,7 +211,7 @@ void RB_Tree<T, G>::delete_case2(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_case3(Node *n)
+void Map<T, G>::delete_case3(Node *n)
 {
 	Node *s = sibling(n);
 	if ((n->p->color == 1) && (s && s->color == 1) && 
@@ -227,7 +225,7 @@ void RB_Tree<T, G>::delete_case3(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_case4(Node *n)
+void Map<T, G>::delete_case4(Node *n)
 {
 	Node *s = sibling(n);
 
@@ -242,7 +240,7 @@ void RB_Tree<T, G>::delete_case4(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_case5(Node *n)
+void Map<T, G>::delete_case5(Node *n)
 {
 	Node *s = sibling(n);
 	if (s && s->color == 1) {
@@ -262,7 +260,7 @@ void RB_Tree<T, G>::delete_case5(Node *n)
 }
 
 template <class T, class G>
-void RB_Tree<T, G>::delete_case6(Node *n)
+void Map<T, G>::delete_case6(Node *n)
 {
 	Node *s = sibling(n);
 	if (s) {
@@ -281,7 +279,7 @@ void RB_Tree<T, G>::delete_case6(Node *n)
 
 
 template <class T, class G>
-LinkedList<T>* RB_Tree<T, G>::get_keys()
+LinkedList<T>* Map<T, G>::get_keys()
 {
 	LinkedList<T> *lstKey = new LinkedList<T>;
 	if (size != 0) {
@@ -293,7 +291,7 @@ LinkedList<T>* RB_Tree<T, G>::get_keys()
 };
 
 template <class T, class G>
-LinkedList<G>* RB_Tree<T, G>::get_values()
+LinkedList<G>* Map<T, G>::get_values()
 {
 	LinkedList<G> *lstVal = new LinkedList<G>;
 	if (size != 0) {
@@ -305,7 +303,7 @@ LinkedList<G>* RB_Tree<T, G>::get_values()
 };
 
 template <class T, class G>
-void RB_Tree<T, G>::print(Node *node, long tab)
+void Map<T, G>::print(Node *node, long tab)
 {
 	if (root == nullptr)
 		cout << "Tree is empty";
@@ -328,7 +326,7 @@ void RB_Tree<T, G>::print(Node *node, long tab)
 
 
 template <class T, class G>
-bool RB_Tree<T, G>::are_equal_keys(T *a1, T *a2, int s1, int s2)
+bool Map<T, G>::are_equal_keys(T *a1, T *a2, int s1, int s2)
 {
 	for (int i = 0; i < s1, i < s2; i++)
 		if (a1[i] != a2[i]) return false;
@@ -336,7 +334,7 @@ bool RB_Tree<T, G>::are_equal_keys(T *a1, T *a2, int s1, int s2)
 }
 
 template <class T, class G>
-bool RB_Tree<T, G>::are_equal_colors(bool *a1, bool *a2, int s1, int s2)
+bool Map<T, G>::are_equal_colors(bool *a1, bool *a2, int s1, int s2)
 {
 	for (int i = 0; i < s1, i < s2; i++)
 		if (a1[i] != a2[i]) return false;
