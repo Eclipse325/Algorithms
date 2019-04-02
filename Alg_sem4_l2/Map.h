@@ -29,10 +29,9 @@ public:
 		Node *p = {};
 		Node *right = {};
 		Node *left = {};
-		bool color; //1 - black, 0 - red;
+		bool color = 0; //1 - black, 0 - red;
 	}; 
 
-public:
 	class Iterator
 	{
 	public:
@@ -70,9 +69,6 @@ public:
 		Node* current;
 	};
 
-	Node *root;
-	size_t size;
-
 	Map();
 	~Map();
 	void insert(T key, G value); //To add the node to tree
@@ -101,7 +97,7 @@ public:
 		return nullptr;
 	}; //find the node in tree
 	void clear(); //delete the tree
-	void print(Node *n, long tab); //print the tree
+	void print(); //print the tree
 	LinkedList<T>* get_keys(); //return the keys' list
 	LinkedList<G>* get_values(); //return the values' list
 
@@ -109,7 +105,28 @@ public:
 		return new DFT_Iterator(root);
 	};
 
-public:
+private:
+	Node *root;
+	size_t size;
+	void printTree(Node *node, int tab) {
+		if (root == nullptr)
+			cout << "Tree is empty";
+
+		else if (node != nullptr) {
+			printTree(node->left, tab + 1);
+			for (int k = 0; k < tab; k++) {
+				cout << '\t';
+			}
+
+			if (node->p != nullptr && node == node->p->left) cout << "L: ";
+			else if (node->p != nullptr && node == node->p->right) cout << "R: ";
+			cout << node->key;
+			if (node->color == 1) cout << "(B)";
+			else cout << "(R)";
+			cout << endl;
+			printTree(node->right, tab + 1);
+		}
+	}
 	Node* grandparent(Node *n) {
 		if ((n != nullptr) && (n->p != nullptr))
 			return	n->p->p;
@@ -135,7 +152,7 @@ public:
 		Node *pivot = n->right;
 		pivot->p = n->p;
 		if (n->p != nullptr) {
-			if (n->p->left == n)
+			if (n == n->p->left)
 				n->p->left = pivot;
 			else n->p->right = pivot;
 		}
