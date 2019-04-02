@@ -170,6 +170,14 @@ template <class T, class G>
 void Map<T, G>::delete_one_child(Node *n)
 {
 		if (!n->left && !n->right) {
+			if (n->color == 0) {
+				if (n == n->p->left) n->p->left = nullptr;
+				else n->p->right = nullptr;
+				n->p = nullptr;
+				delete n;
+				n = nullptr;
+				return;
+			}
 			if (n->color == 1 && !sibling(n) && n->p->color == 0)
 				n->p->color = 1;
 			else if (n->p->color == 0 && n->color == 1 && sibling(n) && sibling(n)->color == 1) {
@@ -303,25 +311,9 @@ LinkedList<G>* Map<T, G>::get_values()
 };
 
 template <class T, class G>
-void Map<T, G>::print(Node *node, long tab)
+void Map<T, G>::print()
 {
-	if (root == nullptr)
-		cout << "Tree is empty";
-
-	else if (node != nullptr) {
-		print(node->left, tab + 1);
-		for (int k = 0; k < tab; k++) {
-			cout << '\t';
-		}
-
-		if (node->p != nullptr && node == node->p->left) cout << "L: ";
-		else if (node->p != nullptr && node == node->p->right) cout << "R: ";
-		cout << node->key;
-		if (node->color == 1) cout << "(B)";
-		else cout << "(R)";
-		cout << endl;
-		print(node->right, tab + 1);
-	}
+	printTree(root, 0);
 }
 
 
