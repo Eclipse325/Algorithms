@@ -1,0 +1,3 @@
+﻿  HuffTests.cpp
+c:\users\dimokku\source\repos\alg_sem4_l3\huffman.cpp(72): warning C4267: =: преобразование из "size_t" в "char"; возможна потеря данных
+  HuffTests.vcxproj -> C:\Users\Dimokku\source\repos\Alg_sem4_l3\Debug\HuffTests.dll
